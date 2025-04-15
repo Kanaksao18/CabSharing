@@ -10,10 +10,10 @@
     <!-- Desktop Navigation -->
     <div class="hidden md:flex space-x-8">
       <a href="index.php" class="hover:text-green-600 font-medium">Home</a>
-      <a href="submit-recipe.php" class="hover:text-green-600 font-medium">Submit Recipe</a>
-      <a href="show-recipe.php" class="hover:text-green-600 font-medium">View Recipes</a>
-      <a href="browse.php" class="hover:text-green-600 font-medium">Browse</a>
-      <a href="community.php" class="hover:text-green-600 font-medium">Community</a>
+      <a href="offer-ride.php" class="hover:text-green-600 font-medium">Offer Ride</a>
+      <a href="find-ride.php" class="hover:text-green-600 font-medium">Find Ride</a>
+      <a href="my-rides.php" class="hover:text-green-600 font-medium">My Rides</a>
+      <a href="profile.php" class="hover:text-green-600 font-medium">Profile</a>
     </div>
 
     <!-- Right Section -->

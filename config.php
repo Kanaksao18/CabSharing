@@ -1,11 +1,18 @@
 <?php
 $host = 'localhost';
-$db   = 'cabshare';
+$db   = 'booking';
 $user = 'root';
 $pass = ''; // use your db password
+$charset = 'utf8mb4';
 
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
+} catch (PDOException $e) {
+    echo "Database connection failed: " . $e->getMessage();
+    exit;
 }
 ?>

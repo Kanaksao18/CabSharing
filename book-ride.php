@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div>
                             <label for="seats" class="block text-sm font-medium text-gray-700">Number of Seats</label>
                             <input type="number" id="seats" name="seats" min="1" max="<?php echo $ride['available_seats']; ?>" required
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8B5CF6] focus:ring-[#8B5CF6]"
                                 placeholder="Select number of seats">
                             <p class="mt-1 text-sm text-gray-500">
                                 <?php echo $ride['available_seats']; ?> seats available
@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Price per Seat</label>
-                            <p class="mt-1 text-2xl font-bold text-green-600">₹<?php echo number_format($ride['price_per_seat'], 2); ?></p>
+                            <p class="mt-1 text-2xl font-bold text-[#8B5CF6]">₹<?php echo number_format($ride['price_per_seat'], 2); ?></p>
                             <p class="text-sm text-gray-500">Total price will be calculated based on seats selected</p>
                         </div>
                     </div>
@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             Cancel
                         </a>
                         <button type="submit"
-                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#8B5CF6] hover:bg-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#8B5CF6]">
                             Confirm Booking
                         </button>
                     </div>

@@ -132,10 +132,20 @@ $reviews = $stmt->fetchAll();
                     </div>
                 <?php endif; ?>
 
-                <?php if ($success): ?>
-                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-                        <span class="block sm:inline"><?php echo htmlspecialchars($success); ?></span>
+                <?php if (isset($_SESSION['success'])): ?>
+                    <div class="bg-[#8B5CF6] bg-opacity-10 border-l-4 border-[#8B5CF6] p-4 mb-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-[#8B5CF6]"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-[#8B5CF6]">
+                                    <?php echo $_SESSION['success']; ?>
+                                </p>
+                            </div>
+                        </div>
                     </div>
+                    <?php unset($_SESSION['success']); ?>
                 <?php endif; ?>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -194,7 +204,7 @@ $reviews = $stmt->fetchAll();
                                     </div>
                                     <div class="mt-4">
                                         <button type="submit" name="update_status"
-                                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                            class="bg-[#8B5CF6] text-white px-4 py-2 rounded hover:bg-[#7C3AED] transition-colors">
                                             Update Status
                                         </button>
                                     </div>

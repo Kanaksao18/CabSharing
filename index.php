@@ -11,64 +11,134 @@
     <?php include 'components/navbar.php'; ?>
     
     <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-green-500 to-green-700 text-white">
-        <div class="max-w-7xl mx-auto px-4 py-24 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6">Share Your Journey</h1>
+    <div class="bg-white  min-h-[600px]">
+    <div class="max-w-7xl mx-auto px-4 py-20 grid grid-cols-1 md:grid-cols-2 items-center gap-8 ">
+        <!-- Left Column - Text -->
+        <div class="text-center md:text-left relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Share Your Journey</h1>
             <p class="text-xl mb-8">Find or offer rides, save money, and make new connections</p>
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <a href="find-ride.php" class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Find a Ride</a>
-                <a href="offer-ride.php" class="bg-transparent border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition">Offer a Ride</a>
+            <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+                <a href="find-ride.php" class="bg-[#8B5CF6] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#7C3AED] transition">Find a Ride</a>
+                <a href="offer-ride.php" class="bg-transparent border-2 border-black px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#8B5CF6] transition">Offer a Ride</a>
             </div>
         </div>
+
+        <!-- Right Column - Image -->
+        <div class="relative">
+            <img src="assets/car.png" alt="Hero Image" class="w-full h-full object-cover rounded-lg shadow-lg opacity-100">
+        </div>
     </div>
+</div>
+
+
 
     <!-- Features Section -->
     <div class="max-w-7xl mx-auto px-4 py-16">
-        <h2 class="text-3xl font-bold text-center mb-12">Why Choose CabShare?</h2>
+        <h2 class="text-4xl font-bold text-center mb-4">Why Choose <span class="text-[#8B5CF6]">CabShare</span>?</h2>
+        <p class="text-gray-600 text-center text-lg mb-16 max-w-3xl mx-auto">Our platform makes ride-sharing simple, affordable and secure. Discover the benefits of sharing your journey with others.</p>
+        
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <i class="fas fa-money-bill-wave text-4xl text-green-500 mb-4"></i>
-                <h3 class="text-xl font-semibold mb-2">Save Money</h3>
-                <p class="text-gray-600">Split the cost of your journey with fellow travelers</p>
+            <!-- Split Fares Card -->
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-12 h-12 bg-[#8B5CF6]/10 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-dollar-sign text-[#8B5CF6] text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Split Fares</h3>
+                <p class="text-gray-600">Divide cab costs evenly among passengers and save up to 60% on your daily commute.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <i class="fas fa-users text-4xl text-green-500 mb-4"></i>
-                <h3 class="text-xl font-semibold mb-2">Meet People</h3>
-                <p class="text-gray-600">Connect with like-minded travelers in your area</p>
+
+            <!-- Save Time Card -->
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-12 h-12 bg-[#8B5CF6]/10 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-clock text-[#8B5CF6] text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Save Time</h3>
+                <p class="text-gray-600">Optimize your route with others going the same way and reduce wait times.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <i class="fas fa-leaf text-4xl text-green-500 mb-4"></i>
-                <h3 class="text-xl font-semibold mb-2">Eco-Friendly</h3>
-                <p class="text-gray-600">Reduce your carbon footprint by sharing rides</p>
+
+            <!-- Verified Users Card -->
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-12 h-12 bg-[#8B5CF6]/10 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-shield-alt text-[#8B5CF6] text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Verified Users</h3>
+                <p class="text-gray-600">Feel secure with our thorough verification process for all platform members.</p>
+            </div>
+
+            <!-- Route Matching Card -->
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-12 h-12 bg-[#8B5CF6]/10 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-map-marker-alt text-[#8B5CF6] text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Route Matching</h3>
+                <p class="text-gray-600">Our smart algorithm finds the perfect match for your route and schedule.</p>
+            </div>
+
+            <!-- Community Card -->
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-12 h-12 bg-[#8B5CF6]/10 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-users text-[#8B5CF6] text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Community</h3>
+                <p class="text-gray-600">Join a community of like-minded commuters and expand your professional network.</p>
+            </div>
+
+            <!-- Easy Communication Card -->
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-12 h-12 bg-[#8B5CF6]/10 rounded-lg flex items-center justify-center mb-6">
+                    <i class="fas fa-comments text-[#8B5CF6] text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Easy Communication</h3>
+                <p class="text-gray-600">Chat with potential ride-shares before confirming your journey together.</p>
             </div>
         </div>
     </div>
 
     <!-- How It Works Section -->
-    <div class="bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 py-16">
-            <h2 class="text-3xl font-bold text-center mb-12">How It Works</h2>
-            <div class="grid md:grid-cols-3 gap-8">
+    <div class="bg-[#F5F3FF] py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-4">How <span class="text-[#8B5CF6]">CabShare</span> Works</h2>
+            <p class="text-gray-600 text-center text-lg mb-16 max-w-3xl mx-auto">Get started with CabShare in just a few simple steps and transform your daily commute.</p>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
                 <div class="text-center">
-                    <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl font-bold text-green-500">1</span>
+                    <div class="relative w-24 h-24 bg-[#8B5CF6] rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-[#8B5CF6] rounded-full flex items-center justify-center text-white font-bold">1</span>
+                        <i class="fas fa-map-marker-alt text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Create an Account</h3>
-                    <p class="text-gray-600">Sign up and complete your profile</p>
+                    <h3 class="text-xl font-bold mb-3">Enter Your Route</h3>
+                    <p class="text-gray-600">Input your pickup and drop-off locations along with your preferred time.</p>
                 </div>
+
+                <!-- Step 2 -->
                 <div class="text-center">
-                    <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl font-bold text-green-500">2</span>
+                    <div class="relative w-24 h-24 bg-[#8B5CF6] rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-[#8B5CF6] rounded-full flex items-center justify-center text-white font-bold">2</span>
+                        <i class="fas fa-search text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Find or Offer a Ride</h3>
-                    <p class="text-gray-600">Search for rides or post your own journey</p>
+                    <h3 class="text-xl font-bold mb-3">Find Matches</h3>
+                    <p class="text-gray-600">Browse through potential cab-share partners going your way.</p>
                 </div>
+
+                <!-- Step 3 -->
                 <div class="text-center">
-                    <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl font-bold text-green-500">3</span>
+                    <div class="relative w-24 h-24 bg-[#8B5CF6] rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-[#8B5CF6] rounded-full flex items-center justify-center text-white font-bold">3</span>
+                        <i class="fas fa-calendar-check text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Connect & Travel</h3>
-                    <p class="text-gray-600">Message your ride partner and hit the road</p>
+                    <h3 class="text-xl font-bold mb-3">Book Your Ride</h3>
+                    <p class="text-gray-600">Schedule your journey and confirm details with your cab-share partners.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="text-center">
+                    <div class="relative w-24 h-24 bg-[#8B5CF6] rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-[#8B5CF6] rounded-full flex items-center justify-center text-white font-bold">4</span>
+                        <i class="fas fa-car text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Share & Save</h3>
+                    <p class="text-gray-600">Enjoy your ride and split the fare automatically through our app.</p>
                 </div>
             </div>
         </div>
@@ -85,17 +155,17 @@
                 <div>
                     <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="about.php" class="text-gray-400 hover:text-white">About Us</a></li>
-                        <li><a href="contact.php" class="text-gray-400 hover:text-white">Contact</a></li>
-                        <li><a href="terms.php" class="text-gray-400 hover:text-white">Terms & Conditions</a></li>
+                        <li><a href="about.php" class="text-gray-400 hover:text-[#8B5CF6]">About Us</a></li>
+                        <li><a href="contact.php" class="text-gray-400 hover:text-[#8B5CF6]">Contact</a></li>
+                        <li><a href="terms.php" class="text-gray-400 hover:text-[#8B5CF6]">Terms & Conditions</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="text-xl font-semibold mb-4">Connect With Us</h3>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[#8B5CF6]"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[#8B5CF6]"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[#8B5CF6]"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>

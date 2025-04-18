@@ -141,10 +141,20 @@ $stats = [
                     </div>
                 <?php endif; ?>
 
-                <?php if ($success): ?>
-                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-                        <span class="block sm:inline"><?php echo htmlspecialchars($success); ?></span>
+                <?php if (isset($_SESSION['success'])): ?>
+                    <div class="bg-[#8B5CF6] bg-opacity-10 border-l-4 border-[#8B5CF6] p-4 mb-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-[#8B5CF6]"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-[#8B5CF6]">
+                                    <?php echo $_SESSION['success']; ?>
+                                </p>
+                            </div>
+                        </div>
                     </div>
+                    <?php unset($_SESSION['success']); ?>
                 <?php endif; ?>
 
                 <!-- Statistics Cards -->
@@ -257,10 +267,8 @@ $stats = [
                         </div>
 
                         <div class="md:col-span-4 flex justify-end">
-                            <button type="submit"
-                                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                                <i class="fas fa-search mr-2"></i>
-                                Search
+                            <button type="submit" class="bg-[#8B5CF6] text-white px-4 py-2 rounded hover:bg-[#7C3AED] transition-colors">
+                                Apply Filters
                             </button>
                         </div>
                     </form>

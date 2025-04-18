@@ -150,8 +150,17 @@ $stats = [
                 <?php endif; ?>
 
                 <?php if ($success): ?>
-                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-                        <span class="block sm:inline"><?php echo htmlspecialchars($success); ?></span>
+                    <div class="bg-[#8B5CF6] bg-opacity-10 border-l-4 border-[#8B5CF6] p-4 mb-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-[#8B5CF6]"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-[#8B5CF6]">
+                                    <?php echo htmlspecialchars($success); ?>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 <?php endif; ?>
 

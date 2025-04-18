@@ -2,10 +2,37 @@
 session_start();
 require_once 'config/database.php';
 
+// Initialize database connection
+try {
+    if (!isset($conn)) {
+        $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+} catch(PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
 // Check if user is logged in
 if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
+    header("Location: login.php");
     exit();
+}
+
+$user_id = $_SESSION['user']['id'];
+
+// Get user's rides
+try {
+    $stmt = $conn->prepare("
+        SELECT r.*, u.name as driver_name, u.phone as driver_phone, u.email as driver_email
+        FROM rides r
+        JOIN users u ON r.driver_id = u.id
+        WHERE r.driver_id = ?
+        ORDER BY r.departure_time DESC
+    ");
+    $stmt->execute([$user_id]);
+    $rides = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch(PDOException $e) {
+    $error = "Error fetching rides: " . $e->getMessage();
 }
 
 $error = '';
@@ -15,20 +42,20 @@ $success = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_ride'])) {
     $ride_id = $_POST['ride_id'];
     try {
-        $pdo->beginTransaction();
+        $conn->beginTransaction();
         
         // Update ride status
-        $stmt = $pdo->prepare("UPDATE rides SET status = 'cancelled' WHERE id = ? AND driver_id = ?");
+        $stmt = $conn->prepare("UPDATE rides SET status = 'cancelled' WHERE id = ? AND driver_id = ?");
         $stmt->execute([$ride_id, $_SESSION['user']['id']]);
         
         // Update all bookings for this ride
-        $stmt = $pdo->prepare("UPDATE bookings SET status = 'cancelled' WHERE ride_id = ?");
+        $stmt = $conn->prepare("UPDATE bookings SET status = 'cancelled' WHERE ride_id = ?");
         $stmt->execute([$ride_id]);
         
-        $pdo->commit();
+        $conn->commit();
         $success = 'Ride cancelled successfully';
     } catch (PDOException $e) {
-        $pdo->rollBack();
+        $conn->rollBack();
         $error = 'Failed to cancel ride';
     }
 }
@@ -37,33 +64,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_ride'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_booking'])) {
     $booking_id = $_POST['booking_id'];
     try {
-        $pdo->beginTransaction();
+        $conn->beginTransaction();
         
         // Get booking details
-        $stmt = $pdo->prepare("SELECT * FROM bookings WHERE id = ? AND passenger_id = ?");
+        $stmt = $conn->prepare("SELECT * FROM bookings WHERE id = ? AND passenger_id = ?");
         $stmt->execute([$booking_id, $_SESSION['user']['id']]);
         $booking = $stmt->fetch();
         
         if ($booking) {
             // Update booking status
-            $stmt = $pdo->prepare("UPDATE bookings SET status = 'cancelled' WHERE id = ?");
+            $stmt = $conn->prepare("UPDATE bookings SET status = 'cancelled' WHERE id = ?");
             $stmt->execute([$booking_id]);
             
             // Update available seats
-            $stmt = $pdo->prepare("UPDATE rides SET available_seats = available_seats + ? WHERE id = ?");
+            $stmt = $conn->prepare("UPDATE rides SET available_seats = available_seats + ? WHERE id = ?");
             $stmt->execute([$booking['seats_booked'], $booking['ride_id']]);
             
-            $pdo->commit();
+            $conn->commit();
             $success = 'Booking cancelled successfully';
         }
     } catch (PDOException $e) {
-        $pdo->rollBack();
+        $conn->rollBack();
         $error = 'Failed to cancel booking';
     }
 }
 
 // Get user's offered rides
-$stmt = $pdo->prepare("SELECT r.*, COUNT(b.id) as total_bookings 
+$stmt = $conn->prepare("SELECT r.*, COUNT(b.id) as total_bookings 
                       FROM rides r 
                       LEFT JOIN bookings b ON r.id = b.ride_id 
                       WHERE r.driver_id = ? 
@@ -73,7 +100,7 @@ $stmt->execute([$_SESSION['user']['id']]);
 $offered_rides = $stmt->fetchAll();
 
 // Get user's booked rides
-$stmt = $pdo->prepare("SELECT b.*, r.source, r.destination, r.departure_time, r.car_model, r.car_number, 
+$stmt = $conn->prepare("SELECT b.*, r.source, r.destination, r.departure_time, r.car_model, r.car_number, 
                       u.name as driver_name, u.rating as driver_rating 
                       FROM bookings b 
                       JOIN rides r ON b.ride_id = r.id 
@@ -105,7 +132,7 @@ $booked_rides = $stmt->fetchAll();
             <?php endif; ?>
 
             <?php if ($success): ?>
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <div class="bg-[#F5F3FF] border border-[#8B5CF6] text-[#8B5CF6] px-4 py-3 rounded relative mb-4" role="alert">
                     <span class="block sm:inline"><?php echo htmlspecialchars($success); ?></span>
                 </div>
             <?php endif; ?>
@@ -116,7 +143,7 @@ $booked_rides = $stmt->fetchAll();
                 <?php if (empty($offered_rides)): ?>
                     <div class="bg-white shadow-md rounded-lg p-6 text-center">
                         <p class="text-gray-600">You haven't offered any rides yet.</p>
-                        <a href="offer-ride.php" class="text-green-600 hover:text-green-700">Offer a ride now!</a>
+                        <a href="offer-ride.php" class="text-[#8B5CF6] hover:text-[#7C3AED]">Offer a ride now!</a>
                     </div>
                 <?php else: ?>
                     <div class="grid gap-6">
@@ -145,7 +172,7 @@ $booked_rides = $stmt->fetchAll();
                                         </p>
                                     </div>
                                     <div class="text-right">
-                                        <p class="text-2xl font-bold text-green-600">₹<?php echo number_format($ride['price_per_seat'], 2); ?></p>
+                                        <p class="text-2xl font-bold text-[#8B5CF6]">₹<?php echo number_format($ride['price_per_seat'], 2); ?></p>
                                         <p class="text-gray-600">per seat</p>
                                         <?php if ($ride['status'] === 'active'): ?>
                                             <form method="POST" class="mt-4">
@@ -174,7 +201,7 @@ $booked_rides = $stmt->fetchAll();
                 <?php if (empty($booked_rides)): ?>
                     <div class="bg-white shadow-md rounded-lg p-6 text-center">
                         <p class="text-gray-600">You haven't booked any rides yet.</p>
-                        <a href="find-ride.php" class="text-green-600 hover:text-green-700">Find a ride now!</a>
+                        <a href="find-ride.php" class="text-[#8B5CF6] hover:text-[#7C3AED]">Find a ride now!</a>
                     </div>
                 <?php else: ?>
                     <div class="grid gap-6">
@@ -193,7 +220,7 @@ $booked_rides = $stmt->fetchAll();
                                     <div>
                                         <p class="text-gray-600">
                                             <i class="fas fa-user"></i> Driver: <?php echo htmlspecialchars($booking['driver_name']); ?>
-                                            <span class="ml-2 text-yellow-500">
+                                            <span class="ml-2 text-[#8B5CF6]">
                                                 <?php for ($i = 1; $i <= 5; $i++): ?>
                                                     <i class="fas fa-star<?php echo $i <= $booking['driver_rating'] ? '' : '-o'; ?>"></i>
                                                 <?php endfor; ?>
@@ -208,9 +235,9 @@ $booked_rides = $stmt->fetchAll();
                                         </p>
                                     </div>
                                     <div class="text-right">
-                                        <p class="text-2xl font-bold text-green-600">₹<?php echo number_format($booking['total_price'], 2); ?></p>
-                                        <p class="text-gray-600">total</p>
-                                        <?php if ($booking['status'] === 'pending' || $booking['status'] === 'confirmed'): ?>
+                                        <p class="text-2xl font-bold text-[#8B5CF6]">₹<?php echo number_format($booking['total_price'], 2); ?></p>
+                                        <p class="text-gray-600">total amount</p>
+                                        <?php if ($booking['status'] === 'confirmed'): ?>
                                             <form method="POST" class="mt-4">
                                                 <input type="hidden" name="booking_id" value="<?php echo $booking['id']; ?>">
                                                 <button type="submit" name="cancel_booking"
